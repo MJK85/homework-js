@@ -1,6 +1,6 @@
 <template>
-  <RouterLink :to="{name: 'SingleRepo', params: { id: repoInfo.id }}" class="repo">
-    <div @click="saveSingleRepo" class="clickWrapper">
+  <RouterLink :to="{name: 'SingleRepo', params: { id: repoInfo.id, data: JSON.stringify(repoInfo) }}" class="repo">
+    <div class="clickWrapper">
       <img :src="repoInfo.owner.avatar_url" :alt="repoInfo.owner.login">
       <div>
         <h2><span>ID: {{ repoInfo.id }}</span><span>Owner: {{ repoInfo.owner.login }}</span></h2>
@@ -13,26 +13,20 @@
 <script>
 export default {
   name: "RepoOnList",
-  props: ['repoInfo'],
-  methods: {
-    saveSingleRepo() {
-      const payload = this.repoInfo
-      this.$store.dispatch('saveSingleRepoAction', payload)
-      this.$store.dispatch('saveSingleRepoCommits', payload)
-    }
-  }
+  props: ['repoInfo']
 }
 </script>
 
 <style lang="scss">
 .repo {
   display: block;
+  border-radius: 8px;
   .clickWrapper {
     display: flex;
     align-items: center;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, .5);
-    padding-right: 18px;
     border-radius: 8px;
+    padding-right: 18px;
     overflow: hidden;
 
     img {
