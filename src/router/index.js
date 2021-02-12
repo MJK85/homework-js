@@ -4,6 +4,7 @@ import Users from "@/views/Users";
 import Repos from "@/views/Repos";
 import PageNotFound from "@/views/PageNotFound";
 import SingleUser from "@/views/SingleUser";
+import SingleRepo from "@/views/SingleRepo";
 
 const routes = [
   {
@@ -26,6 +27,12 @@ const routes = [
     path: '/repos',
     name: 'Repos',
     component: Repos
+  },
+  {
+    path: '/repos/:id',
+    name: 'SingleRepo',
+    component: SingleRepo,
+    props: true
   },
   {
     path: '/:catchAll(.*)',

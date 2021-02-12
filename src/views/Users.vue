@@ -1,9 +1,9 @@
 <template>
-  <NavPanel v-if="users.length" @load="load"/>
+  <NavPanel v-if="users.length"/>
   <div v-if="users.length" class="users">
     <ul>
       <li v-for="user in users" :key="user.id">
-        <User :userInfo="user"/>
+        <UserOnList :userInfo="user"/>
       </li>
     </ul>
     <div>Loading</div>
@@ -13,42 +13,30 @@
 
 <script>
 import LoadingData from "@/components/LoadingData";
-import User from "@/components/User";
+import UserOnList from "@/components/UserOnList";
 import NavPanel from "@/components/NavPanel";
 
 export default {
   name: "Users",
-  components: {NavPanel, User, LoadingData},
-  data() {
-    return {
-      users: []
-    }
-  },
+  components: {NavPanel, UserOnList, LoadingData},
   created() {
     window.addEventListener('scroll', this.handleScroll)
+    this.$store.dispatch('fetchUsers')
   },
-  mounted() {
-    fetch('https://api.github.com/users?per_page=100')
-        .then(res => res.json())
-        .then(data => this.users = data)
+  computed: {
+    users() {
+      return this.$store.state.users
+    }
   },
   unmounted() {
     window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
-    load(button) {
-      if (button === 'next') {
-        const id = this.users[this.users.length - 1].id
-        fetch(`https://api.github.com/users?per_page=100&since=${id}`)
-            .then(res => res.json())
-            .then(data => this.users = [...this.users, ...data])
-      }
-    },
     handleScroll(e) {
       let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight
 
       if (bottomOfWindow) {
-        this.load('next')
+        this.$store.dispatch('addMoreUsers')
       }
     }
   }
@@ -63,6 +51,15 @@ export default {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 24px;
+    transition: .2s;
+    @media screen and (max-width: 1366px) {
+      max-width: 900px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media screen and (max-width: 1024px) {
+      max-width: 600px;
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   div {
     text-align: center;
