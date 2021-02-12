@@ -13,5 +13,18 @@ export default {
       .then(res => res.json())
       .then(data => context.commit('setMoreUsers', data)
       )
+  },
+  fetchRepos: (context, payload) => {
+    fetch(`https://api.github.com/search/repositories?q=${payload.name}+in:name&sort=${payload.sort}&order=${payload.order}&per_page=${payload.perPage}&page=${payload.page}`)
+      .then(res => res.json())
+      .then(data => {
+        context.commit('setRepos', data)
+      })
+  },
+  resetRepos: (context) => {
+    context.commit('setReposReset')
+  },
+  saveSingleRepoAction: (context, payload) => {
+    context.commit('setSingleRepo', payload)
   }
 }

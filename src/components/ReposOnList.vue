@@ -1,9 +1,11 @@
 <template>
-  <RouterLink :to="{name: 'SingleRepo', params: {id: repoInfo.id}}" class="repo">
-    <img :src="repoInfo.owner.avatar_url" :alt="repoInfo.owner.login">
-    <div>
-      <h2><span>ID: {{ repoInfo.id }}</span><span>Owner: {{repoInfo.owner.login}}</span></h2>
-      <p>{{ repoInfo.name.length < 20 ? repoInfo.name : `${repoInfo.name.slice(0, 20)}...` }}</p>
+  <RouterLink :to="{name: 'SingleRepo', params: { id: repoInfo.id }}" class="repo">
+    <div @click="saveSingleRepo" class="clickWrapper">
+      <img :src="repoInfo.owner.avatar_url" :alt="repoInfo.owner.login">
+      <div>
+        <h2><span>ID: {{ repoInfo.id }}</span><span>Owner: {{ repoInfo.owner.login }}</span></h2>
+        <p>{{ repoInfo.name.length < 20 ? repoInfo.name : `${repoInfo.name.slice(0, 20)}...` }}</p>
+      </div>
     </div>
   </RouterLink>
 </template>
@@ -11,35 +13,47 @@
 <script>
 export default {
   name: "RepoOnList",
-  props: ['repoInfo']
+  props: ['repoInfo'],
+  methods: {
+    saveSingleRepo() {
+      const payload = this.repoInfo
+      this.$store.dispatch('saveSingleRepoAction', payload)
+    }
+  }
 }
 </script>
 
 <style lang="scss">
 .repo {
-  display: flex;
-  align-items: center;
-  box-shadow: 1px 1px 6px rgba(0,0,0,.5);
-  padding-right: 18px;
-  border-radius: 8px;
-  overflow: hidden;
-  img {
-    height: 120px;
-    width: 120px;
-    margin-right: 18px;
-  }
-  h2 {
-    font-size: 16px;
+  .clickWrapper {
     display: flex;
-    justify-content: space-between;
-    color: #555;
-  }
-  p {
-    font-size: 32px;
-    color: #000;
-  }
-  div {
-    width: 100%;
+    align-items: center;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, .5);
+    padding-right: 18px;
+    border-radius: 8px;
+    overflow: hidden;
+
+    img {
+      height: 120px;
+      width: 120px;
+      margin-right: 18px;
+    }
+
+    h2 {
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      color: #555;
+    }
+
+    p {
+      font-size: 32px;
+      color: #000;
+    }
+
+    div {
+      width: 100%;
+    }
   }
 }
 </style>

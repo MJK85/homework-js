@@ -33,7 +33,7 @@
     <button @click="resetCriteria" class="resetButton">Reset</button>
     <input type="submit" value="SEARCH"/>
   </form>
-  <div v-if="repos.length" class="repos">
+  <div v-if="reposLength" class="repos">
     <ul>
       <li v-for="repo in repos" :key="repo.id">
         <ReposOnList :repoInfo="repo"/>
@@ -63,24 +63,30 @@ export default {
       repositorySort: 'stars',
       repositoryOrder: 'desc',
       repositoriesPerPage: '10',
-      repos: [],
-      totalRepos: '',
       page: 1
     }
   },
   computed: {
+    repos() {
+      return this.$store.state.repos
+    },
+    reposLength() {
+      return this.$store.state.repos.length
+    },
     numberOfPages() {
-      return Math.ceil(this.totalRepos / this.repositoriesPerPage)
+      return Math.ceil(this.$store.state.totalCount / this.repositoriesPerPage)
     }
   },
   methods: {
     searchRepos() {
-      fetch(`https://api.github.com/search/repositories?q=${this.repositoryName}+in:name&sort=${this.repositorySort}&order=${this.repositoryOrder}&per_page=${this.repositoriesPerPage}&page=${this.page}`)
-          .then(res => res.json())
-          .then(data => {
-            this.totalRepos = data.total_count
-            this.repos = data.items
-          })
+      let payload = {
+        name: this.repositoryName,
+        sort: this.repositorySort,
+        order: this.repositoryOrder,
+        perPage: this.repositoriesPerPage,
+        page: this.page
+      }
+      this.$store.dispatch('fetchRepos', payload)
     },
     handlePage(whereTo) {
       if (whereTo === 'next') {
@@ -97,9 +103,8 @@ export default {
       this.repositorySort = 'stars'
       this.repositoryOrder = 'desc'
       this.repositoriesPerPage = '10'
-      this.repos = []
-      this.totalRepos = ''
       this.page = 1
+      this.$store.dispatch('resetRepos')
     }
   }
 }
