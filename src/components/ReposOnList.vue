@@ -18,6 +18,7 @@ export default {
     saveSingleRepo() {
       const payload = this.repoInfo
       this.$store.dispatch('saveSingleRepoAction', payload)
+      this.$store.dispatch('saveSingleRepoCommits', payload)
     }
   }
 }
@@ -25,6 +26,7 @@ export default {
 
 <style lang="scss">
 .repo {
+  display: block;
   .clickWrapper {
     display: flex;
     align-items: center;

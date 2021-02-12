@@ -2,5 +2,7 @@ export default {
   users: [],
   repos: [],
   totalCount: '',
-  singleRepo: {}
+  singleRepo: {},
+  singleRepoContributors: [],
+  singleRepoCommits: []
 }

@@ -15,5 +15,11 @@ export default {
   },
   setSingleRepo: (state, data) => {
     state.singleRepo = data
+  },
+  setSingleRepoContributors: (state, data) => {
+    state.singleRepoContributors = data
+  },
+  setSingleRepoCommits: (state, data) => {
+    state.singleRepoCommits = data
   }
 }
