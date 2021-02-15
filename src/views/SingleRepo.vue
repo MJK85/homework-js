@@ -112,11 +112,12 @@ export default {
 .singleRepoCard {
   padding: 24px 0;
   width: 100%;
-  background: #d7d7d7;
+  background: #03a9f4;
 
   > h4 {
     max-width: 1200px;
     margin: 60px auto 0;
+    color: #fff;
   }
 
   a {
@@ -137,6 +138,7 @@ export default {
     margin: 24px auto;
     border-radius: 8px;
     padding: 24px;
+    box-shadow: 1px 1px 12px rgba(0, 0, 0, .5);
 
     h4 {
       font-size: 16px;

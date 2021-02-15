@@ -22,7 +22,7 @@ export default {
   button {
     background: #fff;
     &:hover {
-      background: #42b983;
+      background: #0330f4;
       color: #fff;
     }
   }

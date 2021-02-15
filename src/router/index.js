@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Repos from "@/views/Repos";
 import PageNotFound from "@/views/PageNotFound";
 import SingleUser from "@/views/SingleUser";
 import SingleRepo from "@/views/SingleRepo";
@@ -16,11 +15,6 @@ const routes = [
     name: 'SingleUser',
     component: SingleUser,
     props: true
-  },
-  {
-    path: '/repos',
-    name: 'Repos',
-    component: Repos
   },
   {
     path: '/repos/:id',
