@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="{name: 'SingleRepo', params: { id: repoInfo.id, data: JSON.stringify(repoInfo) }}" class="repo">
+  <RouterLink :to="{name: 'SingleRepo', params: { id: repoInfo.id, owner: repoInfo.owner.login, name: repoInfo.name  }}" class="repo">
     <div class="clickWrapper">
       <img :src="repoInfo.owner.avatar_url" :alt="repoInfo.owner.login">
       <div>

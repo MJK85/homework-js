@@ -7,14 +7,14 @@
       <p>Repository ID: {{ singleRepo.id }}</p>
     </section>
     <h4>Owner</h4>
-    <section class="owner">
-      <img :src="singleRepo.owner.avatar_url" alt="Owner picture">
-      <div>
-        <h3> {{ singleRepo.owner.login }}</h3>
-        <p>Profile ID: {{ singleRepo.owner.id }}</p>
-        <p>GitHub url: {{ singleRepo.owner.html_url }}</p>
-      </div>
-    </section>
+<!--    <section class="owner">-->
+<!--      <img :src="singleRepo.owner.avatar_url" alt="Owner picture">-->
+<!--      <div>-->
+<!--        <h3> {{ singleRepo.owner.login }}</h3>-->
+<!--        <p>Profile ID: {{ singleRepo.owner.id }}</p>-->
+<!--        <p>GitHub url: {{ singleRepo.owner.html_url }}</p>-->
+<!--      </div>-->
+<!--    </section>-->
     <h4>Details</h4>
     <section class="additionalInfo">
       <div>
@@ -64,11 +64,17 @@ import NavPanel from "@/components/NavPanel";
 export default {
   name: "SingleRepo",
   components: {NavPanel},
-  props: ['id', 'data'],
+  props: ['id', 'owner', 'name'],
   created() {
-    let payload = JSON.parse(this.data)
+
+    let payload = {
+      id: this.id,
+      name: this.name,
+      owner: this.owner
+    }
 
     this.$store.dispatch('saveSingleRepoAction', payload)
+    this.$store.dispatch('saveSingleRepoContributors', payload)
     this.$store.dispatch('saveSingleRepoCommits', payload)
   },
   computed: {
@@ -124,6 +130,7 @@ export default {
 
     &.additionalInfo {
       display: flex;
+
       div {
         width: 30%;
       }

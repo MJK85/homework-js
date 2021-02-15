@@ -19,11 +19,11 @@ export default {
   justify-content: space-between;
   margin: 24px auto;
 
-  > div {
-    display: flex;
-
-    button {
-      margin-left: 24px;
+  button {
+    background: #fff;
+    &:hover {
+      background: #42b983;
+      color: #fff;
     }
   }
 }

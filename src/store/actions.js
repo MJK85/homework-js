@@ -25,10 +25,16 @@ export default {
     context.commit('setReposReset')
   },
   saveSingleRepoAction: (context, payload) => {
-    fetch(`https://api.github.com/repos/${payload.owner.login}/${payload.name}/contributors`)
+    fetch(`https://api.github.com/repositories/${payload.id}`)
       .then(res => res.json())
       .then(data => {
-        context.commit('setSingleRepo', payload)
+        context.commit('setSingleRepo', data)
+      })
+  },
+  saveSingleRepoContributors: (context, payload) => {
+    fetch(`https://api.github.com/repos/${payload.owner}/${payload.name}/contributors`)
+      .then(res => res.json())
+      .then(data => {
         context.commit('setSingleRepoContributors', data)
       })
   },
