@@ -30,8 +30,10 @@
           <option value="100">100</option>
         </select>
       </label>
-      <button @click="resetCriteria" class="resetButton">Reset</button>
-      <input type="submit" value="SEARCH"/>
+      <div class="formButtons">
+        <button @click="resetCriteria" class="resetButton">Reset</button>
+        <input type="submit" value="SEARCH"/>
+      </div>
     </form>
     <div v-if="reposLength" class="repos">
       <ul>
@@ -166,6 +168,9 @@ button {
 }
 
 .home {
+
+  padding-top: 60px;
+
   a {
     box-shadow: 0 0 0 rgba(0, 0, 0, .5);
     transition: .2s;
@@ -184,9 +189,14 @@ button {
       grid-template-columns: repeat(2, 1fr);
       grid-gap: 24px;
       transition: .2s;
-      @media screen and (max-width: 1024px) {
+      @media screen and (max-width: 1280px) {
         max-width: 600px;
         grid-template-columns: repeat(1, 1fr);
+        margin: 80px auto;
+      }
+      @media screen and (max-width: 540px) {
+        padding: 0 20px;
+        margin: 60px auto;
       }
     }
   }
@@ -196,12 +206,21 @@ button {
     margin: 24px auto;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 1280px) {
+      max-width: 600px;
+    }
+    @media screen and (max-width: 540px) {
+      padding: 0 20px;
+    }
 
     label {
       font-size: 20px;
       display: flex;
       color: #555;
       flex-direction: column;
+      @media screen and (max-width: 1280px) {
+        margin: 12px 0;
+      }
     }
 
     input, select {
@@ -259,6 +278,44 @@ button {
     .resetButton {
       background: crimson;
       border: 1px solid crimson;
+    }
+  }
+
+  .searchForm {
+    .formButtons {
+      display: flex;
+      flex-direction: row;
+
+      button {
+        margin-right: 18px;
+      }
+    }
+
+    @media screen and (max-width: 1280px) {
+      flex-direction: column;
+      .formButtons {
+        display: flex;
+        margin-top: 24px;
+        justify-content: space-between;
+
+        button, input {
+          width: 48%;
+        }
+      }
+    }
+  }
+
+  .pageNav {
+    align-items: center;
+    @media screen and (max-width: 1280px) {
+      span {
+        font-size: 18px;
+      }
+    }
+    @media screen and (max-width: 540px) {
+      span {
+        font-size: 14px;
+      }
     }
   }
 

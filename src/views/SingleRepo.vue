@@ -11,8 +11,10 @@
       <img :src="singleRepoOwner.avatar_url" alt="Owner picture">
       <div>
         <h3>{{ singleRepoOwner.login }}</h3>
-        <p>Profile ID: {{ singleRepoOwner.id }}</p>
-        <p>GitHub url: {{ singleRepoOwner.html_url }}</p>
+        <h4>Profile ID:</h4>
+        <p>{{ singleRepoOwner.id }}</p>
+        <h4>GitHub url:</h4>
+        <a :href="singleRepoOwner.html_url" target="_blank">{{ singleRepoOwner.html_url }}</a>
       </div>
     </section>
     <h4>Details</h4>
@@ -110,7 +112,7 @@ export default {
 
 <style lang="scss">
 .singleRepoCard {
-  padding: 24px 0;
+  padding: 24px;
   width: 100%;
   background: #03a9f4;
 
@@ -124,6 +126,7 @@ export default {
     font-size: 14px;
     color: #000;
     display: block;
+    overflow: hidden;
 
     &:hover {
       box-shadow: none;
@@ -151,6 +154,15 @@ export default {
 
     &.owner {
       display: flex;
+      @media screen and (max-width: 540px) {
+        flex-direction: column;
+        h3 {
+          font-size: 24px;
+        }
+        h3, p {
+          margin-bottom: 8px;
+        }
+      }
 
       img {
         width: 156px;
@@ -161,9 +173,19 @@ export default {
 
     &.additionalInfo {
       display: flex;
+      @media screen and (max-width: 540px) {
+        flex-direction: column;
+      }
 
       div {
         margin-right: 48px;
+        @media screen and (max-width: 540px) {
+          margin-right: 0;
+          margin-bottom: 12px;
+          h4 {
+            margin-bottom: 8px;
+          }
+        }
       }
     }
 
@@ -173,19 +195,37 @@ export default {
         margin-bottom: 24px;
         display: flex;
         flex-direction: column;
+
         > div {
           margin: 12px 0;
+
           &:first-of-type {
             display: flex;
+
             > div {
               width: 30%;
               margin-right: 20px;
+              @media screen and(max-width: 1024px) {
+                margin-right: 0;
+                margin-bottom: 12px;
+                &:first-of-type {
+                  p {
+                    font-size: 12px;
+                  }
+                }
+              }
+            }
+
+            @media screen and (max-width: 1024px) {
+              flex-direction: column;
             }
           }
         }
+
         h4 {
           margin-bottom: 8px;
         }
+
         &:last-of-type {
           border: none;
         }
@@ -204,9 +244,19 @@ export default {
         border-radius: 30px;
         margin: 24px;
         transition: .2s;
+
         &:hover {
           transform: translateY(-6px);
-          box-shadow: 0 2px 12px rgba(0,0,0,.5);
+          box-shadow: 0 2px 12px rgba(0, 0, 0, .5);
+        }
+
+        @media screen and (max-width: 768px) {
+          width: 25%;
+          margin: 12px;
+        }
+        @media screen and (max-width: 540px) {
+          width: 100%;
+          margin: 12px;
         }
 
 

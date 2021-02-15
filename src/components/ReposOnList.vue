@@ -1,5 +1,6 @@
 <template>
-  <RouterLink :to="{name: 'SingleRepo', params: { id: repoInfo.id, owner: repoInfo.owner.login, name: repoInfo.name  }}" class="repo">
+  <RouterLink :to="{name: 'SingleRepo', params: { id: repoInfo.id, owner: repoInfo.owner.login, name: repoInfo.name  }}"
+              class="repo">
     <div class="clickWrapper">
       <img :src="repoInfo.owner.avatar_url" :alt="repoInfo.owner.login">
       <div>
@@ -21,6 +22,7 @@ export default {
 .repo {
   display: block;
   border-radius: 8px;
+
   .clickWrapper {
     display: flex;
     align-items: center;
@@ -40,11 +42,18 @@ export default {
       display: flex;
       justify-content: space-between;
       color: #555;
+      @media screen and (max-width: 540px) {
+        flex-direction: column;
+        margin-bottom: 8px;
+      }
     }
 
     p {
       font-size: 32px;
       color: #000;
+      @media screen and (max-width: 540px) {
+        font-size: 16px;
+      }
     }
 
     div {

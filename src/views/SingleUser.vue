@@ -8,7 +8,7 @@
       <h4>User ID:</h4>
       <p>{{ singleUser.id }}</p>
       <h4>User GitHub HTML page:</h4>
-      <p><a :href="singleUser.html_url">{{ singleUser.html_url }}</a></p>
+      <p><a :href="singleUser.html_url" target="_blank">{{ singleUser.html_url }}</a></p>
       <h4>Company:</h4>
       <p>{{ singleUser.company ? singleUser.company : 'Not available' }}</p>
       <h4>Blog:</h4>
@@ -55,6 +55,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 540px) {
+    height: auto;
+    padding: 100px 20px 50px;
+  }
 
   .singleUserCard {
     min-width: 450px;
@@ -65,7 +69,11 @@ export default {
     margin: 0 auto;
     background: #fff;
     position: relative;
-    box-shadow: 6px 6px 10px rgba(0,0,0,.5);
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, .5);
+    @media screen and (max-width: 540px) {
+      min-width: 300px;
+      max-width: 350px;
+    }
 
     h2 {
       text-align: center;
@@ -88,6 +96,11 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       background: rgba(33, 150, 243, 1);
+      @media screen and (max-width: 540px) {
+        width: 120px;
+        height: 120px;
+        top: -60px;
+      }
 
       img {
         height: 178px;
@@ -97,8 +110,11 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        box-shadow: 6px 6px 10px rgba(0,0,0,.5);
-
+        box-shadow: 6px 6px 10px rgba(0, 0, 0, .5);
+        @media screen and (max-width: 540px) {
+          width: 105px;
+          height: 105px;
+        }
       }
     }
 
@@ -124,6 +140,9 @@ export default {
       margin: 24px auto 0;
       font-size: 18px;
       line-height: 18px;
+      @media screen and (max-width: 540px) {
+        width: 80%;
+      }
     }
   }
 }
