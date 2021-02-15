@@ -34,7 +34,7 @@
     </section>
     <h4>Commits</h4>
     <section class="commits">
-      <div v-for="commit in commits" :key="commit.sha" class="singleCommitCard">
+      <div v-if="commits" v-for="commit in commits" :key="commit.sha" class="singleCommitCard">
         <div>
           <div>
             <h4>sha:</h4>
@@ -58,9 +58,12 @@
           <a :href="commit.html_url" target="_blank">{{ commit.html_url }}</a>
         </div>
       </div>
+      <div v-else>
+        <h4>No commits found...</h4>
+      </div>
     </section>
     <h4>Contributors</h4>
-    <section class="contributors">
+    <section v-if="contributors" class="contributors">
       <RouterLink v-for="contributor in contributors" :key="contributor.login"
                   :to="{name: 'SingleUser', params: {login: contributor.login}}" class="pill">
         <div>
@@ -68,6 +71,9 @@
           <p>{{ contributor.login }}</p>
         </div>
       </RouterLink>
+    </section>
+    <section v-else>
+      <h4>No contributors found...</h4>
     </section>
   </main>
 </template>
@@ -114,7 +120,7 @@ export default {
 .singleRepoCard {
   padding: 24px;
   width: 100%;
-  background: #03a9f4;
+  background: var(--SingleUserAndRepoBackgroundColor);
 
   > h4 {
     max-width: 1200px;
@@ -130,7 +136,7 @@ export default {
 
     &:hover {
       box-shadow: none;
-      color: #555;
+      color: var(--TextGreyColor);
       transform: none;
     }
   }
@@ -145,7 +151,7 @@ export default {
 
     h4 {
       font-size: 16px;
-      color: #555;
+      color: var(--TextGreyColor);
     }
 
     p {
@@ -239,7 +245,7 @@ export default {
 
       .pill {
         padding: 2px;
-        border: 1px solid #555;
+        border: 1px solid var(--TextGreyColor);
         width: 20%;
         border-radius: 30px;
         margin: 24px;

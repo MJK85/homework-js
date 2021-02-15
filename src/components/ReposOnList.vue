@@ -41,7 +41,7 @@ export default {
       font-size: 16px;
       display: flex;
       justify-content: space-between;
-      color: #555;
+      color: var(--TextGreyColor);
       @media screen and (max-width: 540px) {
         flex-direction: column;
         margin-bottom: 8px;

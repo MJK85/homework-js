@@ -147,9 +147,16 @@ export default {
   box-sizing: border-box;
 }
 
+:root {
+  --ButtonPrimaryBorderColor: #03a8f4;
+  --ButtonOnHoverColor: #0330f4;
+  --TextGreyColor: #555;
+  --SingleUserAndRepoBackgroundColor: #2196f3;
+}
+
 button {
   background: none;
-  border: 1px solid #03a8f4;
+  border: 1px solid var(--ButtonPrimaryBorderColor);
   border-radius: 4px;
   padding: 12px 24px;
   cursor: pointer;
@@ -161,8 +168,8 @@ button {
   transition: .2s;
 
   &:hover {
-    background: #0330f4;
-    border: 1px solid #0330f4;
+    background: var(--ButtonOnHoverColor);
+    border: 1px solid var(--ButtonOnHoverColor);
     color: #fff;
   }
 }
@@ -216,7 +223,7 @@ button {
     label {
       font-size: 20px;
       display: flex;
-      color: #555;
+      color: var(--TextGreyColor);
       flex-direction: column;
       @media screen and (max-width: 1280px) {
         margin: 12px 0;
@@ -229,13 +236,13 @@ button {
       border-radius: 8px;
       border: 1px solid #000;
       font-size: 18px;
-      color: #555;
+      color: var(--TextGreyColor);
     }
 
     button {
       font-family: 'Roboto', sans-serif;
       font-weight: bold;
-      color: #555;
+      color: var(--TextGreyColor);
 
       &:hover {
         color: #fff;
@@ -270,8 +277,8 @@ button {
 
       &:hover {
         background: #fff;
-        border: 1px solid #555;
-        color: #555;
+        border: 1px solid var(--TextGreyColor);
+        color: var(--TextGreyColor);
       }
     }
 
@@ -323,7 +330,7 @@ button {
     margin-top: 160px;
 
     h2 {
-      color: #555;
+      color: var(--TextGreyColor);
     }
   }
 }

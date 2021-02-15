@@ -51,7 +51,7 @@ export default {
 .singleUserPage {
   width: 100%;
   height: 100vh;
-  background: rgba(33, 150, 243, 1);
+  background: var(--SingleUserAndRepoBackgroundColor);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,7 +83,7 @@ export default {
 
     h4 {
       font-size: 14px;
-      color: #aaa;
+      color: var(--TextGreyColor);
       margin: 8px 0;
     }
 
@@ -127,7 +127,7 @@ export default {
     a {
       &:hover {
         box-shadow: none;
-        color: #555;
+        color: var(--TextGreyColor);
         transform: none;
       }
     }
