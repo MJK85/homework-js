@@ -55,6 +55,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  @media screen and (min-width: 1920px) {
+    min-height: 100vh;
+  }
 
   .singleUserCard {
     min-width: 450px;
