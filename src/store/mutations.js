@@ -1,10 +1,4 @@
 export default {
-  setUsers: (state, data) => {
-    state.users = data
-  },
-  setMoreUsers: (state, data) => {
-    state.users = [...state.users, ...data]
-  },
   setRepos: (state, data) => {
     state.totalCount = data.total_count
     state.repos = data.items
@@ -16,10 +10,16 @@ export default {
   setSingleRepo: (state, data) => {
     state.singleRepo = data
   },
+  setSingleRepoOwner: (state, data) => {
+    state.singleRepoOwner = data
+  },
   setSingleRepoContributors: (state, data) => {
     state.singleRepoContributors = data
   },
   setSingleRepoCommits: (state, data) => {
     state.singleRepoCommits = data
+  },
+  setSingleUser: (state, data) => {
+    state.singleUser = data
   }
 }

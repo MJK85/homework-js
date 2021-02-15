@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Users from "@/views/Users";
 import Repos from "@/views/Repos";
 import PageNotFound from "@/views/PageNotFound";
 import SingleUser from "@/views/SingleUser";
@@ -11,11 +10,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/users',
-    name: 'Users',
-    component: Users
   },
   {
     path: '/users/:login',

@@ -1,8 +1,9 @@
 export default {
-  users: [],
   repos: [],
   totalCount: '',
   singleRepo: {},
+  singleRepoOwner: {},
   singleRepoContributors: [],
-  singleRepoCommits: []
+  singleRepoCommits: [],
+  singleUser: {}
 }

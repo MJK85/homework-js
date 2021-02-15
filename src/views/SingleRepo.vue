@@ -7,19 +7,19 @@
       <p>Repository ID: {{ singleRepo.id }}</p>
     </section>
     <h4>Owner</h4>
-<!--    <section class="owner">-->
-<!--      <img :src="singleRepo.owner.avatar_url" alt="Owner picture">-->
-<!--      <div>-->
-<!--        <h3> {{ singleRepo.owner.login }}</h3>-->
-<!--        <p>Profile ID: {{ singleRepo.owner.id }}</p>-->
-<!--        <p>GitHub url: {{ singleRepo.owner.html_url }}</p>-->
-<!--      </div>-->
-<!--    </section>-->
+    <section class="owner">
+      <img :src="singleRepoOwner.avatar_url" alt="Owner picture">
+      <div>
+        <h3>{{ singleRepoOwner.login }}</h3>
+        <p>Profile ID: {{ singleRepoOwner.id }}</p>
+        <p>GitHub url: {{ singleRepoOwner.html_url }}</p>
+      </div>
+    </section>
     <h4>Details</h4>
     <section class="additionalInfo">
       <div>
         <h4>HTML URL:</h4>
-        <p>{{ singleRepo.html_url }}</p>
+        <a :href="singleRepo.html_url" target="_blank">{{ singleRepo.html_url }}</a>
       </div>
       <div>
         <h4>Language:</h4>
@@ -33,16 +33,28 @@
     <h4>Commits</h4>
     <section class="commits">
       <div v-for="commit in commits" :key="commit.sha" class="singleCommitCard">
-        <h4>sha:</h4>
-        <p>{{ commit.sha }}</p>
-        <h4>Author:</h4>
-        <p>{{ commit.commit.author.name }}</p>
-        <h4>Commiter:</h4>
-        <p>{{ commit.commit.committer.name }}</p>
-        <h4>Message:</h4>
-        <p>{{ commit.commit.message }}</p>
-        <h4>Url:</h4>
-        <p>{{ commit.html_url }}</p>
+        <div>
+          <div>
+            <h4>sha:</h4>
+            <p>{{ commit.sha }}</p>
+          </div>
+          <div>
+            <h4>Author:</h4>
+            <p>{{ commit.commit.author.name }}</p>
+          </div>
+          <div>
+            <h4>Commiter:</h4>
+            <p>{{ commit.commit.committer.name }}</p>
+          </div>
+        </div>
+        <div>
+          <h4>Message:</h4>
+          <p>{{ commit.commit.message }}</p>
+        </div>
+        <div>
+          <h4>Url:</h4>
+          <a :href="commit.html_url" target="_blank">{{ commit.html_url }}</a>
+        </div>
       </div>
     </section>
     <h4>Contributors</h4>
@@ -66,20 +78,25 @@ export default {
   components: {NavPanel},
   props: ['id', 'owner', 'name'],
   created() {
+    if (this.owner) {
+      let payload = {
+        id: this.id,
+        name: this.name,
+        owner: this.owner
+      }
 
-    let payload = {
-      id: this.id,
-      name: this.name,
-      owner: this.owner
+      this.$store.dispatch('saveSingleRepoAction', payload.id)
+      this.$store.dispatch('saveSingleRepoOwner', payload.owner)
+      this.$store.dispatch('saveSingleRepoContributors', payload)
+      this.$store.dispatch('saveSingleRepoCommits', payload.id)
     }
-
-    this.$store.dispatch('saveSingleRepoAction', payload)
-    this.$store.dispatch('saveSingleRepoContributors', payload)
-    this.$store.dispatch('saveSingleRepoCommits', payload)
   },
   computed: {
     singleRepo() {
       return this.$store.state.singleRepo
+    },
+    singleRepoOwner() {
+      return this.$store.state.singleRepoOwner
     },
     contributors() {
       return this.$store.state.singleRepoContributors
@@ -100,6 +117,18 @@ export default {
   > h4 {
     max-width: 1200px;
     margin: 60px auto 0;
+  }
+
+  a {
+    font-size: 14px;
+    color: #000;
+    display: block;
+
+    &:hover {
+      box-shadow: none;
+      color: #555;
+      transform: none;
+    }
   }
 
   section {
@@ -132,14 +161,39 @@ export default {
       display: flex;
 
       div {
-        width: 30%;
+        margin-right: 48px;
+      }
+    }
+
+    &.commits {
+      .singleCommitCard {
+        border-bottom: 1px solid #d7d7d7;
+        margin-bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        > div {
+          margin: 12px 0;
+          &:first-of-type {
+            display: flex;
+            > div {
+              width: 30%;
+              margin-right: 20px;
+            }
+          }
+        }
+        h4 {
+          margin-bottom: 8px;
+        }
+        &:last-of-type {
+          border: none;
+        }
       }
     }
 
     &.contributors {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: start;
 
       .pill {
         padding: 2px;
@@ -147,6 +201,11 @@ export default {
         width: 20%;
         border-radius: 30px;
         margin: 24px;
+        transition: .2s;
+        &:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 2px 12px rgba(0,0,0,.5);
+        }
 
 
         > div {
