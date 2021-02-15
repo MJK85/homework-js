@@ -50,15 +50,11 @@ export default {
 <style lang="scss">
 .singleUserPage {
   width: 100%;
-  height: 100vh;
+  padding: 120px 20px 50px;
   background: var(--SingleUserAndRepoBackgroundColor);
   display: flex;
   align-items: center;
   justify-content: center;
-  @media screen and (max-width: 540px) {
-    height: auto;
-    padding: 100px 20px 50px;
-  }
 
   .singleUserCard {
     min-width: 450px;
