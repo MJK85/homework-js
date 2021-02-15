@@ -5,5 +5,10 @@ export default {
   singleRepoOwner: {},
   singleRepoContributors: [],
   singleRepoCommits: [],
-  singleUser: {}
+  singleUser: {},
+  formRepoName: '',
+  formPage: 1,
+  formSort: 'stars',
+  formOrder: 'desc',
+  formPerPage: '10'
 }

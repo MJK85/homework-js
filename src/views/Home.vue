@@ -60,11 +60,18 @@ export default {
   data() {
     return {
       repositoryName: '',
-      repositorySort: 'stars',
-      repositoryOrder: 'desc',
-      repositoriesPerPage: '10',
-      page: 1
+      repositorySort: '',
+      repositoryOrder: '',
+      repositoriesPerPage: '',
+      page: ''
     }
+  },
+  created() {
+    this.repositoryName = this.formRepoName
+    this.page = this.formPage
+    this.repositorySort = this.formSort
+    this.repositoryOrder = this.formOrder
+    this.repositoriesPerPage = this.formPerPage
   },
   computed: {
     repos() {
@@ -75,7 +82,22 @@ export default {
     },
     numberOfPages() {
       return Math.ceil(this.$store.state.totalCount / this.repositoriesPerPage)
-    }
+    },
+    formRepoName() {
+      return this.$store.state.formRepoName
+    },
+    formPage() {
+      return this.$store.state.formPage
+    },
+    formSort() {
+      return this.$store.state.formSort
+    },
+    formOrder() {
+      return this.$store.state.formOrder
+    },
+    formPerPage() {
+      return this.$store.state.formPerPage
+    },
   },
   methods: {
     searchRepos() {
@@ -87,13 +109,19 @@ export default {
         page: this.page
       }
       this.$store.dispatch('fetchRepos', payload)
+      this.$store.dispatch('saveFormRepoName', this.repositoryName)
+      this.$store.dispatch('saveFormSort', this.repositorySort)
+      this.$store.dispatch('saveFormOrder', this.repositoryOrder)
+      this.$store.dispatch('saveFormPerPage', this.repositoriesPerPage)
     },
     handlePage(whereTo) {
       if (whereTo === 'next') {
         this.page += 1
+        this.$store.dispatch('saveFormPage', this.page)
         this.searchRepos()
       } else if (whereTo === 'prev') {
         this.page -= 1
+        this.$store.dispatch('saveFormPage', this.page)
         this.searchRepos()
       }
       window.scrollTo(0, 0)

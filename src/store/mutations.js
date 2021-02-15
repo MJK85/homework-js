@@ -6,6 +6,11 @@ export default {
   setReposReset: state => {
     state.repos = []
     state.totalCount = ''
+    state.formRepoName = ''
+    state.formSort = 'stars'
+    state.formOrder = 'desc'
+    state.formPerPage = '10'
+    state.formPage = 1
   },
   setSingleRepo: (state, data) => {
     state.singleRepo = data
@@ -21,5 +26,20 @@ export default {
   },
   setSingleUser: (state, data) => {
     state.singleUser = data
+  },
+  setFormRepoName: (state, data) => {
+    state.formRepoName = data
+  },
+  setFormPage: (state, data) => {
+    state.formPage = data
+  },
+  setFormSort: (state, data) => {
+    state.formSort = data
+  },
+  setFormOrder: (state, data) => {
+    state.formOrder = data
+  },
+  setFormPerPage: (state, data) => {
+    state.formPerPage = data
   }
 }

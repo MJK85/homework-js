@@ -43,5 +43,20 @@ export default {
       .then(res => res.json())
       .then(data => context.commit('setSingleUser', data))
       .catch(err => console.log(err))
+  },
+  saveFormRepoName: (context, payload) => {
+    context.commit('setFormRepoName', payload)
+  },
+  saveFormPage: (context, payload) => {
+    context.commit('setFormPage', payload)
+  },
+  saveFormSort: (context, payload) => {
+    context.commit('setFormSort', payload)
+  },
+  saveFormOrder: (context, payload) => {
+    context.commit('setFormOrder', payload)
+  },
+  saveFormPerPage: (context, payload) => {
+    context.commit('setFormPerPage', payload)
   }
 }

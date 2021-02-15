@@ -4,7 +4,6 @@
       <div class="pictureWrapper">
         <img :src="singleUser.avatar_url" :alt="singleUser.login + ' user avatar picture'">
       </div>
-
       <h2>{{ singleUser.login }}</h2>
       <h4>User ID:</h4>
       <p>{{ singleUser.id }}</p>
@@ -66,6 +65,7 @@ export default {
     margin: 0 auto;
     background: #fff;
     position: relative;
+    box-shadow: 6px 6px 10px rgba(0,0,0,.5);
 
     h2 {
       text-align: center;
@@ -88,6 +88,7 @@ export default {
       left: 50%;
       transform: translateX(-50%);
       background: rgba(33, 150, 243, 1);
+
       img {
         height: 178px;
         width: 178px;
@@ -96,6 +97,7 @@ export default {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        box-shadow: 6px 6px 10px rgba(0,0,0,.5);
 
       }
     }
